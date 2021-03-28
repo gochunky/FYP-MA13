@@ -14,6 +14,8 @@ header-includes:
 
 # Case 1: Project Selection and Developing a Business Case
 
+# 
+
 ## Overview
 
 In this case study, we will perform two separate tasks: project selection and developing a business case. In Task 1, we perform project selection after evaluating multiple projects using the weighted scoring model. Following this in Task 2, we develop a business case for the project that we select in Task 1.
