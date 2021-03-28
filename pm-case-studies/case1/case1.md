@@ -22,7 +22,7 @@ In this case study, we will perform two separate tasks: project selection and de
 
 ## Task 1: Project Selection
 
-In this task, we apply the weighted scoring model to evaluate four projects and determine which project to choose. The projects are as shown in Table 1.1.
+In this task, we apply the weighted scoring model to evaluate four projects and determine which project to choose. The projects are shown in Table 1.1.
 
 \begin{center}
 \begin{tabular}{ | c | p{0.85\linewidth} | } 
@@ -107,7 +107,7 @@ Very high & 10.0 \\
 \hline
 High & 7.5 \\ 
 \hline
-Medium & 5 \\ 
+Medium & 5.0 \\ 
 \hline
 Low & 2.5 \\ 
 \hline
@@ -277,7 +277,7 @@ There are three options for addressing this opportunity: \\
 \bfseries{6.0 Preliminary Project Requirements} \\\\
 The project should develop the following: \\
 \begin{enumerate}
-\item An AI face recognition model on par with existing face recognition models with minimal performance disparity (< 5\%) in identifying males vs females. This model should accept images and videos with faces and be able to identify the gender and names of the subjects based on labelled samples.
+\item An AI face recognition model on par with existing face recognition models with minimal performance disparity (less than 5\%) in identifying males vs females. This model should accept images and videos with faces and be able to identify the gender and names of the subjects based on labelled samples.
 \item A web platform to test the model with sample images and videos. This platform enables users to submit their images and videos to test the face recognition model.
 \item A system to test, report, and visualise the performance of the AI face recognition system. This system will use metamorphic testing for evaluating model performance, which is a methodology to continuously compare new results of image classification with previous results. The project will need the system to report the results using attractive data visualisation techniques.
 \end{enumerate}
@@ -299,4 +299,29 @@ Besides that, another risk present in this project is that the time spent on dev
 \hline
 \end{longtable}
 
-<!-- TODO: Check references -->
+\newpage
+
+\begin{center}
+\textbf{References}
+\end{center}
+
+##### 
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-collins_2020}{}%
+Collins, T. (2020). Facing gender bias in facial recognition technology.
+In \emph{Help Net Security}.
+\url{https://www.helpnetsecurity.com/2020/08/27/facial-recognition-bias/}
+
+\end{CSLReferences}
+
+<!-- Delete this final page later -->
+
+\newpage
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-collins_2020" class="csl-entry" role="doc-biblioentry">
+Collins, T. (2020). Facing gender bias in facial recognition technology. In <em>Help Net Security</em>. <a href="https://www.helpnetsecurity.com/2020/08/27/facial-recognition-bias/">https://www.helpnetsecurity.com/2020/08/27/facial-recognition-bias/</a>
+</div>
+</div>
