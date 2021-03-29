@@ -4,6 +4,7 @@ pagestyle: empty
 geometry: 'margin=2cm'
 fontsize: 12pt
 header-includes:
+    - \usepackage{mdframed}
     - \usepackage{graphicx}
     - \usepackage{caption}
     - \usepackage{siunitx}
@@ -124,16 +125,14 @@ This scoring system will be consistently applied across all criteria.
 
 This leads to the weighted scoring model as shown in Table 1.5.
 
-##### 
+#### 
 
+\begin{mdframed}
 \begin{center}
 \textbf{Weighted Scoring Model for Gender Bias AI}
 \end{center}
-
-Prepared by: **Yap** Jin Heng, **Goh** Kang Qi, **Choo** Kah Poh Alika
-
-Date: 16 April 2021
-
+\text{Prepared by: YAP Jin Heng, GOH Kang Qi, CHOO Kah Poh Alika} \break
+\text{Date: 16 April 2021}
 \begin{center}
 \begin{tabular}{ | l | c | c | c | c | c | } 
 \hline
@@ -151,7 +150,7 @@ Project flexibility & 20\% & 2.50 & 7.50 & 5.00 & 7.50 \\
 \hline
 \end{tabular}
 \end{center}
-
+\end{mdframed}
 \begin{center}
 \text{Table 1.5: The weighted scoring model}
 \end{center}
@@ -239,7 +238,7 @@ Based on the project we selected in Task 1, we have developed the following busi
 \textbf{Business Case for Gender Bias AI}
 \end{center}
 
-Prepared by: **Yap** Jin Heng, **Goh** Kang Qi, **Choo** Kah Poh Alika
+Prepared by: YAP Jin Heng, GOH Kang Qi, CHOO Kah Poh Alika
 
 Date: 16 April 2021
 
@@ -248,7 +247,7 @@ Date: 16 April 2021
 \begin{longtable}{ | p{\linewidth} | } 
 \hline
 \bfseries{1.0 Introduction/Background} \\\\
-We are a team of three Monash University students with a great passion for AI. Our team is interested and motivated to work on an AI project with social impact. We wish to work on a project that has positive social implications in addition to furthering the understanding of AI among researchers. Recent findings have shown the existence of gender bias in AI. Upon this discovery, we have found ourselves deeply concerned and driven to address this issue of gender bias in AI. \\\\
+We are a team of three Monash University students with a great passion for AI. Our team is interested and motivated to work on an AI project with social impact. We wish to work on a project that has positive social implications in addition to furthering the understanding of AI among researchers. Recent findings have shown the existence of gender bias in AI. These findings have shown that women are more likely to be misidentified by AI compared to men. This is concerning because applications of AI such as face recognition are used in all fields. This bias may threaten gender equality and even cause social unrest. Upon this discovery, we have found ourselves deeply concerned and driven to address this issue of gender bias in AI. \\\\
 \hline
 \bfseries{2.0 Business Objective} \\\\
 We aim to improve existing AI, specifically face recognition systems, against gender bias. An additional aim is to investigate the relationship between AI accuracy and gender identification. This aligns with our goal to increase public trust in AI, with the ultimate aim of encouraging more organisations to adopt AI in their operations. By addressing gender bias, more fields such as security, healthcare, and financial services will be more confident to adopt AI to run their operations. This will lead to a more AI-integrated society. \\\\
@@ -291,7 +290,7 @@ The project should develop the following: \\
 \\
 \hline
 \bfseries{7.0 Schedule Estimate} \\\\
-The project supervisor would like to see the project completed within a year, allowing for some flexibility in the schedule. The AI face recognition model should remain relevant in the field for at least three years. \\\\
+A complete project design needs to be prepared by the start of May 2021, followed by a formal project proposal at the end of May 2021. After the planning phase, the project supervisor would like to see the project completed by the end of October 2021. The AI face recognition model should remain relevant in the field for at least three years. \\\\
 \hline
 \bfseries{8.0 Potential Risks} \\\\
 This project carries numerous risks. A major technical risk of this project is that the AI face recognition model might require more computational resources than expected. This may lead to it being incompatible with low-end devices. Another technical risk is that unexpected bugs in the system might cause the system to fail, which will in turn affect the performance of the product. These technical issues can all be mitigated with extensive software testing. \\\\
