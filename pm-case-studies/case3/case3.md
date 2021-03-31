@@ -16,6 +16,8 @@ header-includes:
 
 \input{scope.tex}
 
+\newpage
+
 ## Task 2: Requirements Traceability Matrix
 
 \input{requirements.tex}
