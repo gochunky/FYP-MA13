@@ -6,7 +6,9 @@ fontsize: 12pt
 header-includes:
     - \usepackage{colortbl}
     - \usepackage{longtable}
+    - \usepackage{stackengine}
     - \definecolor{Gray}{gray}{0.7}
+    - \definecolor{Blue}{rgb}{0.741,0.839,0.933}
     - \newcommand{\bi}[1]{\textbf{\textit{#1}}}
 ---
 
