@@ -131,7 +131,7 @@ This leads to the weighted scoring model as shown in Table 1.5.
 \begin{center}
 \textbf{Weighted Scoring Model for Gender Bias AI}
 \end{center}
-\text{Prepared by: YAP Jin Heng, GOH Kang Qi, CHOO Kah Poh Alika} \break
+\text{Prepared by: \textbf{Yap} Jin Heng, \textbf{Goh} Kang Qi, \textbf{Choo} Kah Poh Alika} \break
 \text{Date: 16 April 2021}
 \begin{center}
 \begin{tabular}{ | l | c | c | c | c | c | } 
@@ -238,7 +238,7 @@ Based on the project we selected in Task 1, we have developed the following busi
 \textbf{Business Case for Gender Bias AI}
 \end{center}
 
-Prepared by: YAP Jin Heng, GOH Kang Qi, CHOO Kah Poh Alika
+Prepared by: **Yap** Jin Heng, **Goh** Kang Qi, **Choo** Kah Poh Alika
 
 Date: 16 April 2021
 
