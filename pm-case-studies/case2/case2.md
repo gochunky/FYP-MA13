@@ -1,7 +1,7 @@
 ---
 classoption: fleqn
 pagestyle: empty
-geometry: 'margin=2cm, bottom=3cm'
+geometry: 'margin=2cm'
 fontsize: 12pt
 ---
 
@@ -146,6 +146,28 @@ appropriate approach to a project. \emph{Procedia Computer Science},
 \newpage
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="_" class="csl-entry" role="doc-biblioentry">
+<div id="ref-AGRAWAL2016291" class="csl-entry" role="doc-biblioentry">
+Agrawal, A., Atiq, Mohd. A., &amp; Maurya, L. S. (2016). A current study on the limitations of agile methods in industry using secure google forms. <em>Procedia Computer Science</em>, <em>78</em>, 291–297. <a href="https://doi.org/10.1016/j.procs.2016.02.056">https://doi.org/10.1016/j.procs.2016.02.056</a>
+</div>
+<div id="ref-casey_2016" class="csl-entry" role="doc-biblioentry">
+Casey, A. (2016). 6 benefits of agile e-learning development. In <em>Training Industry</em>. <a href="https://trainingindustry.com/articles/e-learning/6-benefits-of-agile-e-learning-development/">https://trainingindustry.com/articles/e-learning/6-benefits-of-agile-e-learning-development/</a>
+</div>
+<div id="ref-KIM2015" class="csl-entry" role="doc-biblioentry">
+Kim, C., Jeon, J., &amp; Kim, M.-S. (2015). A project management system based on the PMBOK guide for student-centered learning. <em>International Journal of Knowledge Engineering</em>, <em>1</em>, 185–190. <a href="https://doi.org/10.18178/ijke.2015.1.3.032">https://doi.org/10.18178/ijke.2015.1.3.032</a>
+</div>
+<div id="ref-KOIAKROFI2019" class="csl-entry" role="doc-biblioentry">
+Koi-Akrofi, J., Henry Matey, A., &amp; Koi-Akrofi, G. (2019). Understanding the characteristics, benefits and challenges of agile it project management: A literature based perspective. <em>International Journal of Software Engineering &amp; Applications</em>, <em>10</em>, 25–44. <a href="https://doi.org/10.5121/ijsea.2019.10502">https://doi.org/10.5121/ijsea.2019.10502</a>
+</div>
+<div id="ref-OKOLI2012" class="csl-entry" role="doc-biblioentry">
+Okoli, C., &amp; Carillo, K. (2012). The best of adaptive and predictive methodologies: Open source software development, a balance between agility and discipline. <em>International Journal of Information Technology and Management</em>, <em>11</em>, 153–166. <a href="https://doi.org/10.1504/IJITM.2012.044071">https://doi.org/10.1504/IJITM.2012.044071</a>
+</div>
+<div id="ref-SERRADOR20151040" class="csl-entry" role="doc-biblioentry">
+Serrador, P., &amp; Pinto, J. K. (2015). Does agile work? — a quantitative analysis of agile project success. <em>International Journal of Project Management</em>, <em>33</em>(5), 1040–1051. <a href="https://doi.org/10.1016/j.ijproman.2015.01.006">https://doi.org/10.1016/j.ijproman.2015.01.006</a>
+</div>
+<div id="ref-STARE2013" class="csl-entry" role="doc-biblioentry">
+Stare, A. (2013). Agile project management – a future approach to the management of projects? <em>Dynamic Relationships Management Journal</em>, <em>2</em>, 43–53. <a href="https://projekt35.si/wp-content/uploads/2019/09/Agile_project_management_-_a_future_approach_to_th.pdf">https://projekt35.si/wp-content/uploads/2019/09/Agile_project_management_-_a_future_approach_to_th.pdf</a>
+</div>
+<div id="ref-THESING2021746" class="csl-entry" role="doc-biblioentry">
+Thesing, T., Feldmann, C., &amp; Burchardt, M. (2021). Agile versus waterfall project management: Decision model for selecting the appropriate approach to a project. <em>Procedia Computer Science</em>, <em>181</em>, 746–756. <a href="https://doi.org/10.1016/j.procs.2021.01.227">https://doi.org/10.1016/j.procs.2021.01.227</a>
 </div>
 </div>

@@ -1,7 +1,7 @@
 ---
 classoption: fleqn
 pagestyle: empty
-geometry: 'margin=2cm, bottom=3cm'
+geometry: 'margin=2cm'
 fontsize: 12pt
 header-includes:
     - \usepackage{colortbl}
