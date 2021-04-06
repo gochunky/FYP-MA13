@@ -262,7 +262,7 @@ Face recognition models that apply AI have long been adopted by the market. Howe
 \begin{longtable}{ | p{\linewidth} | } 
 \hline
 \bfseries{4.0 Critical Assumption and Constraints} \\\\
-The proposed AI face recognition model must be an improvement over existing face recognition models. This model must have higher accuracy in identifying faces, particularly in women, to reduce the disparity in model performance between different genders. In order to minimise project cost, the AI model must not require excessive computational resources. The project must develop this model to run on existing hardware and software so it can integrate seamlessly into everyday life. Upon release, the model must only require minimal technical support and provide an easily accessible Application Programming Interface (API) for developers. This is to encourage developers to utilise this face recognition model. \\\\
+The proposed AI face recognition model must be an improvement over existing face recognition models. This model must have higher accuracy in identifying faces, particularly in women, to reduce the disparity in model performance between different genders. In order to minimise project cost, the AI model must not require excessive computational resources. The project must develop this model to run on existing hardware and software so it can integrate seamlessly into everyday life. Upon release, the model must only require minimal technical support and provide easily accessible Application Programming Interfaces (APIs) for developers. This is to encourage developers to utilise this face recognition model. \\\\
 \hline
 \bfseries{5.0 Analysis of Option and Recommendation} \\\\
 There are three options for addressing this opportunity: \\
@@ -283,8 +283,8 @@ The project should develop the following: \\
 \hspace{1cm}\\
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item Application Programming Interfaces (API) compatible with multiple programming languages and multiple operating systems for developers. The model will need to be accessible from popular programming languages for machine learning such as Python, JavaScript, and C++. For accessibility, the model should be executable on popular operating systems such as Windows, macOS, Android, iOS, and various Linux distributions.
-\item Documentation for the face recognition model for developers to reference. This documentation should be hosted on an independent domain. The documentation should be actively updated according to the latest changes to the software.
+\item APIs compatible with multiple programming languages and multiple operating systems for developers. The model will need to be accessible from popular programming languages for machine learning such as Python, JavaScript, and C++. For accessibility, the model should be executable on common operating systems such as Windows, macOS, Android, iOS, and various Linux distributions.
+\item Documentation for the face recognition model for developers to reference. This documentation should be hosted on the same web platform that hosts the face recognition model. The documentation should be actively updated according to the latest changes to the software.
 \item Other features suggested to the model if they add value and performance to the product.
 \end{enumerate}
 \\
