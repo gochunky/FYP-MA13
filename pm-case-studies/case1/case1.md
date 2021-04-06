@@ -283,7 +283,7 @@ The project should develop the following: \\
 \hspace{1cm}\\
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item Application Programming Interfaces (API) compatible with multiple programming languages and multiple operating systems for developers. The model will need to be accessible from popular programming languages for machine learning such as Python, Java, C++, R, and MATLAB. For accessibility, the model should be executable on popular operating systems such as Windows, Mac OS, Android, iOS, and various Linux distributions.
+\item Application Programming Interfaces (API) compatible with multiple programming languages and multiple operating systems for developers. The model will need to be accessible from popular programming languages for machine learning such as Python, JavaScript, and C++. For accessibility, the model should be executable on popular operating systems such as Windows, macOS, Android, iOS, and various Linux distributions.
 \item Documentation for the face recognition model for developers to reference. This documentation should be hosted on an independent domain. The documentation should be actively updated according to the latest changes to the software.
 \item Other features suggested to the model if they add value and performance to the product.
 \end{enumerate}
