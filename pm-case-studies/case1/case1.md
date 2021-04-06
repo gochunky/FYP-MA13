@@ -294,7 +294,7 @@ A complete project design needs to be prepared by the start of May 2021, followe
 \hline
 \bfseries{8.0 Potential Risks} \\\\
 This project carries numerous risks. A major technical risk of this project is that the AI face recognition model might require more computational resources than expected. This may lead to it being incompatible with low-end devices. Another technical risk is that unexpected bugs in the system might cause the system to fail, which will in turn affect the performance of the product. These technical issues can all be mitigated with extensive software testing. \\\\
-Besides that, another risk present in this project is that the time spent on developing this project may exceed our schedule estimate. Unexpected schedule changes may lead to delays in product development. Thus, in order to ensure that the project remains on schedule, our team should adopt the use of project management software such as Gantt charts and critical path analysis. \\\\
+Besides that, another risk present in this project is that the time spent on developing this project may exceed our schedule estimate. Unexpected schedule changes may lead to delays in product development. Thus, in order to ensure that the project remains on schedule, our team should adopt the use of project management software such as Gantt charts as well as techniques such as critical path analysis. \\\\
 \hline
 \end{longtable}
 
