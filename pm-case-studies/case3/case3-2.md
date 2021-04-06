@@ -2,7 +2,7 @@
 classoption: fleqn
 pagestyle: empty
 geometry: 'margin=2cm'
-fontsize: 12pt
+fontsize: 8pt
 header-includes:
     - \usepackage{colortbl}
     - \usepackage{longtable}
@@ -10,16 +10,9 @@ header-includes:
     - \definecolor{Gray}{gray}{0.7}
     - \definecolor{Blue}{rgb}{0.741,0.839,0.933}
     - \newcommand{\bi}[1]{\textbf{\textit{#1}}}
+    - \hyphenpenalty=10000
 ---
 
-# Case 3: Project Scope Management
-
-## Task 1: Project Scope Statement
-
-\input{scope.tex}
-
-\newpage
-
-## Task 2: Requirements Traceability Matrix
+# Task 2: Requirements Traceability Matrix
 
 \input{requirements.tex}

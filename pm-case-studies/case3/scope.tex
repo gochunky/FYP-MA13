@@ -9,35 +9,182 @@
     \textbf{Prepared by:} YAP Jin Heng, GOH Kang Qi, Alika CHOO Kah Poh \\
     \hline
     \multicolumn{2}{|l|}{\textbf{Project Justification:}} \\
-    \multicolumn{2}{|p{\textwidth}|}{ABCDE} \\
+    \multicolumn{2}{|p{\textwidth}|}{This project aims to develop a face recognition model optimised against gender bias. The motivation behind this project stems from recent findings that show increased misidentification rates in women compared to men in state-of-the-art AI, particularly in the domain of face recognition. This project intends to address this issue by developing a model less susceptible to gender bias, which can then be incorporated into all fields that apply face recognition.} \\
     & \\
     \hline
-    \multicolumn{2}{|p{\textwidth}|}{\textbf{Project Characteristics and Requirements:}
-        \begin{enumerate}
-            \item A
-            \item B
-            \item C
-            \item Once upon a time, there was a very smart guy named Alika. Then, he met this other smart guy named Kang Qi. Together, the two of them ruled the world.
-        \end{enumerate}
-    (Clearly identify what is in-scope, what is out of scope and any limitations/constraints and/or assumptions)
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{Project Characteristics and Requirements:}} \\
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{1. AI model must perform face recognition}} \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}In scope:
+        \begin{itemize}
+            \item Accept image and video data in most popular formats, including:
+                \begin{itemize}
+                    \item Image: PNG, JPG, GIF, TIFF, BMP
+                    \item Video: MP4, MOV, WMV, AVI, FLV
+                \end{itemize}
+            \item Detect faces of human subjects and identify their gender
+            \item Detect facial features of subjects, particularly:
+                \begin{itemize}
+                    \item Hair
+                    \item Eyes
+                    \item Nose
+                    \item Mouth
+                \end{itemize}
+            \item Minimal disparity in misidentification rate (less than 5\%) between male and female subjects
+        \end{itemize}
     } \\
-    & \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Out of scope:
+        \begin{itemize}
+            \item Identify non-human subjects
+            \item Process image background
+            \item Classify data unrelated to gender, such as:
+                \begin{itemize}
+                    \item Age
+                    \item Income
+                    \item Nationality
+                \end{itemize}
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Constraints and assumptions:
+        \begin{itemize}
+            \item The project team will be able to obtain a labelled dataset of faces to train the model.
+            \item The project team will be able to obtain a machine with sufficient computational power to train the model.
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{2. AI model must be compatible with multiple programming environments}} \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}In scope:
+        \begin{itemize}
+            \item Compatibility with several programming languages, particularly:
+                \begin{itemize}
+                    \item Python
+                    \item JavaScript
+                    \item C++
+                \end{itemize}
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{
+        \begin{itemize}
+            \item Compatibility with most operating systems, such as:
+                \begin{itemize}
+                    \item Desktop: Windows, macOS, Linux
+                    \item Mobile: Android, iOS
+                \end{itemize}
+            \item APIs for aforementioned programming languages and operating systems
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Out of scope:
+        \begin{itemize}
+            \item Compatibility with other programming languages, such as:
+                \begin{itemize}
+                    \item C\#
+                    \item Ruby
+                    \item Golang
+                \end{itemize}
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Constraints and assumptions:
+        \begin{itemize}
+            \item Developers will use the face recognition model to integrate with existing software.
+            \item The APIs will be maintained and updated at regular intervals after product release to ensure continuous support and forward compatibility.
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{3. Web platform to host the AI model}} \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}In scope:
+        \begin{itemize}
+            \item Accept images and videos uploaded by users
+            \item Process uploaded image and video data
+            \item Display results
+            \item Validate results
+            \item Host developer documentation
+            \item Accept images and videos uploaded by users
+            \item Process uploaded image and video data
+            \item Display results
+            \item Validate results
+            \item Host developer documentation
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Out of scope:
+        \begin{itemize}
+            \item User accounts to store user preferences and personal data
+            \item Image and video upload history for each user
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Constraints and assumptions:
+        \begin{itemize}
+            \item Users will have Internet access.
+            \item Users will access the platform using popular web browsers, such as:
+                \begin{itemize}
+                    \item Chrome
+                    \item Edge
+                    \item Firefox
+                    \item Safari
+                \end{itemize}
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{4. Developer documentation}} \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}In scope:
+        \begin{itemize}
+            \item User guide on how to navigate the web platform
+            \item Setup guide for the AI model
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}
+        \begin{itemize}
+            \item Description of all key aspects of the AI model, particularly:
+                \begin{itemize}
+                    \item Image and video processing
+                    \item Face recognition
+                    \item API function calls
+                \end{itemize}
+            \item Neat organisation for ease of navigation
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Out of scope:
+        \begin{itemize}
+            \item Translations to non-English languages
+            \item Beginner tutorials on learning the programming languages used
+        \end{itemize}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\hspace{0.6cm}Constraints and assumptions:
+        \begin{itemize}
+            \item Users are able to read and understand English.
+            \item Developers are able to read and understand technical documentation.
+        \end{itemize}
+    } \\
     \hline
     \multicolumn{2}{|l|}{\textbf{Summary of Project Deliverables:}} \\
-    \multicolumn{2}{|l|}{\textbf{Project management-related deliverables:}} \\
-    \multicolumn{2}{|p{\textwidth}|}{(Eg: business case, charter, team contract, scope statement, WBS, schedule, cost baseline, status reports, final project presentation, final project report, lessons-learned report, and any other documents required to manage the project.)} \\
-    & \\
-    \multicolumn{2}{|p{\textwidth}|}{\textbf{Project-related deliverables:} research reports, design documents, software code, hardware, etc.
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{Project management-related deliverables:}
         \begin{enumerate}
-            \item A
-            \item B
-            \item C
-            \item Once upon a time, there was a very smart guy named Alika. Then, he met this other smart guy named Kang Qi. Together, the two of them ruled the world.
+            \item Business case
+            \item Scope statement
+            \item Requirements traceability matrix
+            \item Risk register
+            \item Work breakdown structure (WBS)
+            \item Gantt chart (schedule)
+            \item Project design report
+            \item Project progress report
+            \item Project proposal report
+            \item Team management report
+            \item Final project report
+        \end{enumerate}
+    } \\
+    \multicolumn{2}{|p{\textwidth}|}{\textbf{Project-related deliverables:}
+        \begin{enumerate}
+            \item AI face recognition model
+            \item Reports on model accuracy
+            \item APIs for AI model
+            \item Web platform
+            \item AI model source code
+            \item Web platform source code
+            \item Developer documentation
         \end{enumerate}
     } \\
     \hline
     \multicolumn{2}{|l|}{\textbf{Project Success Criteria:}} \\
-    \multicolumn{2}{|p{\textwidth}|}{ABCDE} \\
-    & \\
+    \multicolumn{2}{|p{\textwidth}|}{This project will be considered a success if the following conditions are met:
+        \begin{itemize}
+            \item The face recognition model and all additional software meet the requirements and characteristics mentioned.
+            \item Each deliverable is produced on schedule, with the final project to be completed by the initial deadline of October 2021.
+        \end{itemize}
+    } \\
     \hline
 \end{longtable}
