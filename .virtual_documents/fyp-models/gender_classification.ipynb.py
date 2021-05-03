@@ -18,7 +18,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 import matplotlib.pyplot as plt
 from keras.models import Sequential
-from keras.layers import Dense, Conv2D , MaxPool2D , Flatten , Dropout 
+from keras.layers import Dense, Conv2D , MaxPooling2D , Flatten , Dropout 
 import seaborn as sns
 from keras.optimizers import Adam
 from sklearn.metrics import classification_report, confusion_matrix
@@ -26,7 +26,7 @@ from sklearn.metrics import roc_curve, auc
 from ipykernel import kernelapp as app
 
 
-epochs = 50
+epochs = 300
 batch_size = 64
 img_size = 224
 labels = ['female', 'male']
@@ -107,8 +107,8 @@ y_val = np.array(y_val)
 
 def createModel():
     model = Sequential()
-    # The first two layers with 32 filters of window size 3x3
-    model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(224,224,3)))
+
+    model.add(Conv2D(32, (3, 3), padding="same", activation="relu", input_shape=(224,224,3)))
     model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
@@ -126,145 +126,96 @@ def createModel():
     model.add(Flatten())
     model.add(Dense(512, activation='relu'))
     model.add(Dropout(0.5))
-    model.add(Dense(nClasses, activation='softmax'))
+    model.add(Dense(2, activation='softmax'))
+    
+    opt = Adam(lr=0.000001)
+    model.compile(optimizer = opt , 
+              loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
+              metrics = ['accuracy'])
     
     return model
 
 
+# model.summary()
+
+
 model = createModel()
-#-----------------------------------------------------------------
-model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
-#------------------------------------------------------------------
 checkpoint = ModelCheckpoint('model_best_weights.h5', monitor='loss', verbose=1, # Saves checkpoints
                              save_best_only=True, mode='min', save_freq='epoch')
-
-history = model.fit(x_train,y_train,epochs = epochs , 
+history = model.fit(x_train,y_train,epochs = epochs ,
+                    batch_size=batch_size,
                     validation_data = (x_val, y_val), 
                     callbacks = [checkpoint])
 
 
-model_pert = Sequential()
-
-model_pert.add(Conv2D(32, 3, 3, padding="same", activation="relu", input_shape=(224,224,3)))
-model_pert.add(MaxPool2D())
-
-model_pert.add(Conv2D(64, 3, 3, padding="same", activation="relu"))
-model_pert.add(MaxPool2D())
-model_pert.add(Dropout(0.4))
-
-model_pert.add(Flatten())
-model_pert.add(Dense(2, activation="softmax"))
-
-model_pert.summary()
-#-----------------------------------------------------------------
-opt = Adam(lr=0.000001)
-model_pert.compile(optimizer = opt , 
-              loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
-              metrics = ['accuracy'])
-#------------------------------------------------------------------
-# early_stop = EarlyStopping(monitor='loss', min_delta=0.001, patience=3, mode='min', verbose=1)
-checkpoint = ModelCheckpoint('model_best_weights_pert.h5', monitor='loss', verbose=1, # Saves checkpoints
+model_pert = createModel()
+checkpoint_pert = ModelCheckpoint('model_best_weights_pert.h5', monitor='loss', verbose=1, # Saves checkpoints
                              save_best_only=True, mode='min', save_freq='epoch')
-
-history_pert = model_pert.fit(x_train,y_train,epochs = epochs , 
+history_pert = model.fit(x_train_pert,y_train_pert,epochs = epochs ,
+                    batch_size=batch_size,
                     validation_data = (x_val, y_val), 
-                    callbacks = [checkpoint])
+                    callbacks = [checkpoint_pert])
 
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs_range = range(epochs)
-
-plt.figure(figsize=(15, 15))
-plt.subplot(2, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
-plt.plot(epochs_range, val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
-
-plt.subplot(2, 2, 2)
-plt.plot(epochs_range, loss, label='Training Loss')
-plt.plot(epochs_range, val_loss, label='Validation Loss')
-plt.legend(loc='upper right')
-plt.title('Training and Validation Loss')
-plt.show()
-
-
-num_of_train_samples = train_count
-num_of_test_samples = val_count
-test_datagen = ImageDataGenerator(rescale = 1./255)
-validation_generator = test_datagen.flow_from_directory("preprocessing/val_data",
-                                                        target_size=(224, 224),
-                                                        batch_size=batch_size,
-                                                        class_mode='categorical')
-Y_pred = model.predict_generator(validation_generator, num_of_test_samples // batch_size+1)
-y_pred = np.argmax(Y_pred, axis=1)
-print('Confusion Matrix')
-confusion_matrix_array = confusion_matrix(validation_generator.classes, y_pred)
-print(confusion_matrix_array)
-df_cm = pd.DataFrame(confusion_matrix_array, range(2), range(2))
-# plt.figure(figsize=(10,7))
-sns.set(font_scale=1.4) # for label size
-sns.heatmap(df_cm, annot=True, annot_kws={"size": 12}) # font size
-plt.show()
-
-
-predictions = model.predict_classes(x_val)
-predictions = predictions.reshape(1,-1)[0]
 
 target_names = ['Female (Class 0)','Male (Class 1)']
+test_datagen = ImageDataGenerator(rescale = 1./255)
+validation_generator = test_datagen.flow_from_directory("preprocessing/val_data",
+                                                            target_size=(224, 224),
+                                                            batch_size=batch_size,
+                                                            class_mode='categorical')
+
+def plot_train_val_acc_loss(history, noTrain, noVal):
+    acc = history.history['accuracy']
+    val_acc = history.history['val_accuracy']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+
+    epochs_range = range(epochs)
+
+    plt.figure(figsize=(15, 15))
+    plt.subplot(2, 2, 1)
+    plt.plot(epochs_range, acc, label='Training Accuracy')
+    plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+    plt.legend(loc='lower right')
+    plt.title('Training and Validation Accuracy')
+
+    plt.subplot(2, 2, 2)
+    plt.plot(epochs_range, loss, label='Training Loss')
+    plt.plot(epochs_range, val_loss, label='Validation Loss')
+    plt.legend(loc='upper right')
+    plt.title('Training and Validation Loss')
+    plt.show()
+    
+def gen_cm(model, num_of_val_samples):
+    Y_pred = model.predict(validation_generator, 2500 // batch_size+1)
+    y_pred = np.argmax(Y_pred, axis=1)
+    print('Confusion Matrix')
+    confusion_matrix_array = confusion_matrix(validation_generator.classes, y_pred)
+    print(confusion_matrix_array)
+    df_cm = pd.DataFrame(confusion_matrix_array, range(2), range(2))
+    # plt.figure(figsize=(10,7))
+    sns.set(font_scale=1.4) # for label size
+    sns.heatmap(df_cm, annot=True, annot_kws={"size": 12}) # font size
+    plt.show()
+    return y_pred
+
+
+plot_train_val_acc_loss(history, train_count, val_count)
+
+
+y_pred = gen_cm(model, val_count)
+
+
 print(classification_report(validation_generator.classes, y_pred, target_names=target_names, zero_division=1))
 
 
-acc = history_pert.history['accuracy']
-val_acc = history_pert.history['val_accuracy']
-loss = history_pert.history['loss']
-val_loss = history_pert.history['val_loss']
-
-epochs_range = range(epochs)
-
-plt.figure(figsize=(15, 15))
-plt.subplot(2, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
-plt.plot(epochs_range, val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
-
-plt.subplot(2, 2, 2)
-plt.plot(epochs_range, loss, label='Training Loss')
-plt.plot(epochs_range, val_loss, label='Validation Loss')
-plt.legend(loc='upper right')
-plt.title('Training and Validation Loss')
-plt.show()
+plot_train_val_acc_loss(history, train_pert_count, val_count)
 
 
-num_of_train_samples = train_pert_count
-num_of_test_samples = val_count
-test_datagen = ImageDataGenerator(rescale = 1./255)
-validation_generator = test_datagen.flow_from_directory("preprocessing/val_data",
-                                                        target_size=(224, 224),
-                                                        batch_size=batch_size,
-                                                        class_mode='categorical')
-Y_pred = model_pert.predict_generator(validation_generator, num_of_test_samples // batch_size+1)
-y_pred = np.argmax(Y_pred, axis=1)
-print('Confusion Matrix')
-confusion_matrix_array = confusion_matrix(validation_generator.classes, y_pred)
-print(confusion_matrix_array)
-df_cm = pd.DataFrame(confusion_matrix_array, range(2), range(2))
-# plt.figure(figsize=(10,7))
-sns.set(font_scale=1.4) # for label size
-sns.heatmap(df_cm, annot=True, annot_kws={"size": 12}) # font size
-plt.show()
+y_pred_pert = gen_cm(model_pert, val_count)
 
 
-predictions = model_pert.predict_classes(x_val)
-predictions = predictions.reshape(1,-1)[0]
-
-target_names = ['Female (Class 0)','Male (Class 1)']
-print(classification_report(validation_generator.classes, y_pred, target_names=target_names, zero_division=1))
+print(classification_report(validation_generator.classes, y_pred_pert, target_names=target_names, zero_division=1))
 
 
 def predictImage(filename):
