@@ -286,3 +286,15 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+# macOS data store files
+.DS_Store
+
+# ipython checkpoints
+.ipynb_checkpoints/
+.virtual_documents/
+
+# classifier models
+*.h5
+
+
