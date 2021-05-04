@@ -433,3 +433,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Jin Heng's auxiliary folder
+aux-files/
+
