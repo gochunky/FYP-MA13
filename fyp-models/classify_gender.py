@@ -33,6 +33,13 @@ def parse_args():
 
 
 def preprocess(img_path, img_size=224):
+    """
+    Preprocess a single image to be compatible with our models.
+    
+    :param img_path: filepath to image
+    :param img_size: height and width of image
+    :return: a single image matrix compatible with classification
+    """
     # Convert images from BGR to RGB format
     img_arr = cv2.imread(img_path)
     # Reshaping the arrays to a form that can be processed
@@ -43,21 +50,37 @@ def preprocess(img_path, img_size=224):
 
 
 def load_model(is_perturbed):
+    """
+    Load a single model.
+
+    :param is_perturbed: a boolean indicating whether the model has been trained
+        with perturbed data
+    :return: the corresponding model
+    """
     model_path = f"model_best_weights{'_pert' if is_perturbed else ''}.h5"
-    return tf.keras.load_model(model_path)
+    return tf.keras.models.load_model(model_path)
 
 
 def classify(model, img):
-    return model.predict(img)
+    """
+    Perform a binary classification on an image.
+
+    :param model: model to perform classification
+    :param img: image to classify
+    :return: a tuple indicating (result, confidence) for the classification
+    """
+    return model.predict(img)[0], model.predict_proba(img)[0]
 
 
 def main():
     """Driver code. Run everything here."""
+    labels = ["Female", "Male"]
     args = parse_args()
     img = preprocess(args.image)
     model = load_model(args.perturbed)
-    result = classify(model, img)
-    print(result)
+    result, confidence = classify(model, img)
+    print(f"Classification for {img}: {labels[result]}")
+    print(f"Confidence: {round(confidence * 100, 2)}%")
 
 
 if __name__ == "__main__":
