@@ -1,4 +1,6 @@
+import platform
 import tkinter as tk
+
 from PIL import Image, ImageTk
 from collections import OrderedDict
 from tkinter import filedialog
@@ -29,7 +31,11 @@ class App:
     
     def _constant_widgets(self):
         self.root.title("Gender Classifier")
-        self.root.attributes("-zoomed", True)
+
+        if platform.system() == "Windows":
+            self.root.state("zoomed")
+        else:
+            self.root.attributes("-zoomed", True)
         tk.Label(self.root, text="Gender Classifier", padx=25, pady=6, font=("Helvetica", 24, "bold")).pack()
     
     def _options_menu(self):
