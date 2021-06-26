@@ -29,9 +29,8 @@ class App:
     
     def _constant_widgets(self):
         self.root.title("Gender Classifier")
-        self.root.iconbitmap("app_icon.ico")
-        self.root.state("zoomed")
-        tk.Label(self.root, text="Gender Classifier", padx=25, pady=6, font=("Helvetica", 14, "bold")).pack()
+        self.root.attributes("-zoomed", True)
+        tk.Label(self.root, text="Gender Classifier", padx=25, pady=6, font=("Helvetica", 24, "bold")).pack()
     
     def _options_menu(self):
         menu_frame = tk.Frame(self.root)
