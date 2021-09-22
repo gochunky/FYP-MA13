@@ -1,10 +1,14 @@
+import tensorflow as tf
 import platform
 import tkinter as tk
+import imp
 
 from PIL import Image, ImageTk
 from collections import OrderedDict
 from tkinter import filedialog
 
+# Load in glasses filter module
+pred_mod = imp.load_source('make_pred', '/home/monash/Desktop/fyp-work/gui/fyp-ma-13/fyp-models/gen_results.py')
 
 class App:
     MODELS = OrderedDict((
@@ -84,9 +88,14 @@ class App:
         self.img_tk.place(relx=0.05, rely=0.1)
 
     def classify(self):
-        label = tk.Label(self.frame, text="Prediction: FEMALE", font="Helvetica 18 bold", bg="white")
+        res = pred_mod.make_pred(self.img_name, "mobile")
+        label = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
+        label_confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
+        
         label_y = self.img_tk.winfo_y() + self.img_tk.winfo_height() + 50
+        
         label.place(relx=0.05, y=label_y)
+        label_confidence.place(relx=0.05, y=label_y+100)
 
         self.stats_img = self.update_img(self.MODELS[self.model.get()], 850)
 
