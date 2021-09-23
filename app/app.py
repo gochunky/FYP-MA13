@@ -113,7 +113,8 @@ class App:
                 pred_mod.apply_filter(self.img_name, target_fp, "makeup")
             self.img_name = target_fp + self.img_name.split("/")[-1]      # Update 
 
-        res = pred_mod.make_pred(self.img_name, "mobile")
+        res = pred_mod.make_pred(self.img_name, "res")       # @TODO: Add model type button and update this to change the model
+        # @TODO: Fix overlapping text issue
         label = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
         label_confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
         
