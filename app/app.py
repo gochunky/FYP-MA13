@@ -14,7 +14,7 @@ temp_fp = '/home/monash/Desktop/fyp-work/fyp-ma-13/app/tmp/'
 class App:
     MODELS = OrderedDict((
         ("Baseline (Unperturbed) Model", "unperturbed_stats.png"),
-        ("Model with Makeup Added", "perturbed_stats.png")
+        ("Debiased Model", "perturbed_stats.png")
     ))
 
     PERTURBS = OrderedDict((
@@ -23,11 +23,20 @@ class App:
         ("Make Up Filter", "makeup"),
         ("N95 Mask Filter", "mask")
     ))
+    
+    MODEL_TYPES = OrderedDict((
+        ("ResNet50", "res"),
+        ("DenseNet", "dense"),
+        ("MobileNet", "mobile")
+    ))
 
     __slots__ = (
         "root",
         "model",
         "perturb",
+        "model_type",
+        "prediction",
+        "confidence",
         "frame",
         "img",
         "img_name",
@@ -61,10 +70,15 @@ class App:
         self.perturb = tk.StringVar(self.root)
         self.perturb.set(next(iter(self.PERTURBS)))
         tk.OptionMenu(menu_frame, self.perturb, *self.PERTURBS).pack(side=tk.RIGHT)
+        
+        self.model_type = tk.StringVar(self.root)
+        self.model_type.set(next(iter(self.MODEL_TYPES)))
+        tk.OptionMenu(menu_frame, self.model_type, *self.MODEL_TYPES).pack(side=tk.RIGHT)
     
     def _mainframe(self):
         self.frame = tk.Frame(self.root, bg="white")
         self.frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
+        self.prediction = self.confidence = None
     
     def _buttons(self):
         fixed_options = {
@@ -113,15 +127,22 @@ class App:
                 pred_mod.apply_filter(self.img_name, target_fp, "makeup")
             self.img_name = target_fp + self.img_name.split("/")[-1]      # Update 
 
-        res = pred_mod.make_pred(self.img_name, "res")       # @TODO: Add model type button and update this to change the model
+        print("Chosen model:", self.model_type.get())
+        res = pred_mod.make_pred(self.img_name, self.MODEL_TYPES[self.model_type.get()])  
         # @TODO: Fix overlapping text issue
-        label = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
-        label_confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
+
+        # label = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
+        if self.prediction is not None and self.confidence is not None:
+            self.prediction.destroy()
+            self.confidence.destroy()
+        self.prediction = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
+        self.confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
         
+
         label_y = self.img_tk.winfo_y() + self.img_tk.winfo_height() + 50
-        
-        label.place(relx=0.05, y=label_y)
-        label_confidence.place(relx=0.05, y=label_y+100)
+
+        self.prediction.place(relx=0.05, y=label_y)
+        self.confidence.place(relx=0.05, y=label_y+100)
 
 
         # Reload image
