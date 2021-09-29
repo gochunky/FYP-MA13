@@ -6,6 +6,8 @@ from PIL import Image, ImageTk
 from collections import OrderedDict
 from tkinter import filedialog
 
+import os.path
+
 # Load in glasses filter module
 # @TODO: Replace file paths with something more dynamic
 pred_mod = imp.load_source('make_pred', '/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/gen_results.py')
@@ -37,6 +39,7 @@ class App:
         "model_type",
         "prediction",
         "confidence",
+        "original_fp",
         "frame",
         "img",
         "img_name",
@@ -99,6 +102,7 @@ class App:
         return ImageTk.PhotoImage(img)
 
     def load(self):
+
         for img_display in self.frame.winfo_children():
             img_display.destroy()
 
@@ -107,40 +111,44 @@ class App:
             filetypes=(("Images", "*.png *.jpg *.jpeg"), ("All files", "*.*"))
         )
 
-        # Updates 
+        # Updates image
         self.img = self.update_img(self.img_name, 250)      
 
         img_name = tk.Label(self.frame, text=self.img_name.split("/")[-1], font="Helvetica 18 bold", bg="white")
         img_name.place(relx=0.05, rely=0.05)
+
         self.img_tk = tk.Label(self.frame, image=self.img)
         self.img_tk.place(relx=0.05, rely=0.1)
 
+        self.original_fp = self.img_name
+        print("img_name >>>", self.original_fp)
+
     def classify(self):
         # Get image with filter on first
-        # @TODO: Fix overlapping filters
         if self.perturb.get() != "No Filter":
             filter_type = self.PERTURBS[self.perturb.get()]
             target_fp = temp_fp + filter_type + "/" 
-            if filter_type == 'glasses':
-                pred_mod.apply_filter(self.img_name, target_fp, "glasses")
-            elif filter_type == 'makeup':
-                pred_mod.apply_filter(self.img_name, target_fp, "makeup")
-            self.img_name = target_fp + self.img_name.split("/")[-1]      # Update 
+
+            self.img_name = target_fp + self.original_fp.split("/")[-1]  
+            if not os.path.exists(self.img_name):       # If the image already exists, pass
+                # Apply filter to original image
+                if filter_type == 'glasses':
+                    pred_mod.apply_filter(self.original_fp, target_fp, "glasses")
+                elif filter_type == 'makeup':
+                    pred_mod.apply_filter(self.original_fp, target_fp, "makeup")
 
         print("Chosen model:", self.model_type.get())
         res = pred_mod.make_pred(self.img_name, self.MODEL_TYPES[self.model_type.get()])  
-        # @TODO: Fix overlapping text issue
 
-        # label = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
+        # Update prediction and confidence labels
         if self.prediction is not None and self.confidence is not None:
+            # Reset labels
             self.prediction.destroy()
             self.confidence.destroy()
         self.prediction = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
         self.confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
-        
 
         label_y = self.img_tk.winfo_y() + self.img_tk.winfo_height() + 50
-
         self.prediction.place(relx=0.05, y=label_y)
         self.confidence.place(relx=0.05, y=label_y+100)
 
