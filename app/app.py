@@ -15,8 +15,8 @@ temp_fp = '/home/monash/Desktop/fyp-work/fyp-ma-13/app/tmp/'
 
 class App:
     MODELS = OrderedDict((
-        ("Baseline (Unperturbed) Model", "unperturbed_stats.png"),
-        ("Debiased Model", "perturbed_stats.png")
+        ("Baseline (Unperturbed) Model", False),
+        ("Debiased Model", True)
     ))
 
     PERTURBS = OrderedDict((
@@ -135,11 +135,10 @@ class App:
                     pred_mod.apply_filter(self.original_fp, target_fp, "glasses")
                 elif filter_type == 'makeup':
                     pred_mod.apply_filter(self.original_fp, target_fp, "makeup")
-        else: 
-            self.img_name = self.original_fp
-            
+        else: self.img_name = self.original_fp
+
         print("Chosen model:", self.model_type.get())
-        res = pred_mod.make_pred(self.img_name, self.MODEL_TYPES[self.model_type.get()])  
+        res = pred_mod.make_pred(self.img_name, self.MODEL_TYPES[self.model_type.get()], debiased=self.MODELS[self.model.get()])  
 
         # Update prediction and confidence labels
         if self.prediction is not None and self.confidence is not None:
@@ -159,7 +158,7 @@ class App:
         self.img_tk = tk.Label(self.frame, image=self.img)
         self.img_tk.place(relx=0.05, rely=0.1)
 
-        self.stats_img = self.update_img(self.MODELS[self.model.get()], 850)
+        # self.stats_img = self.update_img(self.MODELS[self.model.get()], 850)
         stats_tk = tk.Label(self.frame, image=self.stats_img, bg="white")
         stats_tk.place(relx=0.4, rely=0.1)
 
