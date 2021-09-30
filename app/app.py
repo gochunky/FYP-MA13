@@ -6,8 +6,6 @@ from PIL import Image, ImageTk
 from collections import OrderedDict
 from tkinter import filedialog
 
-import os.path
-
 # Load in glasses filter module
 # @TODO: Replace file paths with something more dynamic
 pred_mod = imp.load_source('make_pred', '/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/gen_results.py')
@@ -129,12 +127,12 @@ class App:
             target_fp = temp_fp + filter_type + "/" 
 
             self.img_name = target_fp + self.original_fp.split("/")[-1]  
-            if not os.path.exists(self.img_name):       # If the image already exists, pass
-                # Apply filter to original image
-                if filter_type == 'glasses':
-                    pred_mod.apply_filter(self.original_fp, target_fp, "glasses")
-                elif filter_type == 'makeup':
-                    pred_mod.apply_filter(self.original_fp, target_fp, "makeup")
+
+            # Apply filter to original image
+            if filter_type == 'glasses':
+                pred_mod.apply_filter(self.original_fp, target_fp, "glasses")
+            elif filter_type == 'makeup':
+                pred_mod.apply_filter(self.original_fp, target_fp, "makeup")
         else: self.img_name = self.original_fp
 
         print("Chosen model:", self.model_type.get())
@@ -151,7 +149,6 @@ class App:
         label_y = self.img_tk.winfo_y() + self.img_tk.winfo_height() + 50
         self.prediction.place(relx=0.05, y=label_y)
         self.confidence.place(relx=0.05, y=label_y+100)
-
 
         # Reload image
         self.img = self.update_img(self.img_name, 250)  
