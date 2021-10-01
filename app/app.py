@@ -123,6 +123,8 @@ class App:
         self.original_fp = self.img_name
 
     def classify(self):
+
+
         # Get image with filter on first
         if self.perturb.get() != "No Filter":
             filter_type = self.PERTURBS[self.perturb.get()]
@@ -133,11 +135,13 @@ class App:
             # Apply filter to original image
             if filter_type == 'glasses' or filter_type == 'makeup' or filter_type == 'mask':
                 pred_mod.apply_filter(self.original_fp, target_fp, filter_type)
-                
+
         else: self.img_name = self.original_fp
 
         print("Chosen model:", self.model_type.get())
-        res = pred_mod.make_pred(self.img_name, self.MODEL_TYPES[self.model_type.get()], debiased=self.MODELS[self.model.get()])  
+        isDebiased = self.MODELS[self.model.get()]
+        modelType = self.MODEL_TYPES[self.model_type.get()]
+        res = pred_mod.make_pred(self.img_name, modelType, debiased=isDebiased)  
 
         # Update prediction and confidence labels
         if self.prediction is not None and self.confidence is not None:
@@ -156,7 +160,8 @@ class App:
         self.img_tk = tk.Label(self.frame, image=self.img)
         self.img_tk.place(relx=0.05, rely=0.1)
 
-        # self.stats_img = self.update_img(self.MODELS[self.model.get()], 850)
+        stats_fp = 'stats_diagrams/{}{}_stats_graph.png'.format(modelType, '_debiased' if isDebiased else '')
+        self.stats_img = self.update_img(stats_fp, 850)
         stats_tk = tk.Label(self.frame, image=self.stats_img, bg="white")
         stats_tk.place(relx=0.4, rely=0.1)
 
