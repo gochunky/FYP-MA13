@@ -13,8 +13,6 @@ This notebook is focused on model creation, model training and model evaluation.
 - Model creation using transfer learning
     - Base models (from step 4) are used here
 - Model training
-- Build models for all sets
-    - Call gen_models_all_sets()
 - Model Analysis
     - Get model statistics
 - Findings and results
