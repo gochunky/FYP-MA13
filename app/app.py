@@ -9,9 +9,8 @@ from tkinter import filedialog
 
 
 # Load in glasses filter module
-# @TODO: Replace file paths with something more dynamic
-pred_mod = imp.load_source('make_pred', '/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/gen_results.py')
-temp_fp = '/home/monash/Desktop/fyp-work/fyp-ma-13/app/tmp/'
+pred_mod = imp.load_source('make_pred', '../fyp-models/gen_results.py')
+temp_fp = 'tmp/'
 
 class App:
     MODELS = OrderedDict((
@@ -108,7 +107,7 @@ class App:
 
         self.img_name = filedialog.askopenfilename(
             title="Choose an image",
-            filetypes=(("Images", "*.png *.jpg *.jpeg"), ("All files", "*.*"))
+            filetypes=(("Images", "*.png *.jpg "), ("All files", "*.*"))
         )
 
         # Updates image
@@ -149,7 +148,7 @@ class App:
             self.prediction.destroy()
             self.confidence.destroy()
         self.prediction = tk.Label(self.frame, text="Prediction: {}".format(res[0]), font="Helvetica 18 bold", bg="white")
-        self.confidence = tk.Label(self.frame, text="Confidence: {}".format(res[1][0][0].round(2)), font="Helvetica 18 bold", bg="white")
+        self.confidence = tk.Label(self.frame, text="Confidence: {}".format(str(round(float(res[1][0][0]), 2))), font="Helvetica 18 bold", bg="white")
 
         label_y = self.img_tk.winfo_y() + self.img_tk.winfo_height() + 50
         self.prediction.place(relx=0.05, y=label_y)
