@@ -6,11 +6,12 @@
 # - gen_save_cr_cm() : Generates, saves and returns classification reports and confusion matrix
 # - make_pred() : Returns predicted class and confidence for a single image
 
-# In[8]:
+# In[1]:
 
 
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from keras.preprocessing.image import ImageDataGenerator
+from pathlib import Path
 from PIL import Image
 from sklearn.metrics import classification_report, confusion_matrix
 from tqdm import tqdm
@@ -19,17 +20,19 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 import json
-from pathlib import Path
+import imp
+
+from subprocess import call         # To call mask filter function
 
 
-# In[9]:
+# In[2]:
 
 
 import os.path
 from os import path
 
 
-# In[2]:
+# In[3]:
 
 
 BATCH_SIZE = 32
@@ -186,13 +189,7 @@ def gen_save_cr_cm(model_type, all_models, original_fp, target_fp, perturbation=
 
 # # Make individual predictions
 
-# In[1]:
-
-
-import imp
-
-
-# In[2]:
+# In[21]:
 
 
 # Load in glasses filter module
@@ -200,32 +197,42 @@ glasses_mod = imp.load_source('apply_glasses', '/home/monash/Desktop/fyp-work/fy
 makeup_mod = imp.load_source('apply_makeup', '/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/preprocessing/gen_perturbed_test_sets.py')
 
 
-# In[3]:
+# In[22]:
 
 
 # Perturbation functions
-# @TODO: Implement perturbation functions
-# Each function temporarily saves the perturbed images
-def apply_mask():
-    return
-    
 def apply_filter(original_fp, target_fp, filter_type):
+    """
+    Applies a specific filter to specific image
+    
+    image_fp : str
+        File path containing image
+    target_fp : str
+        Target path to folder to store image
+    """
     spl = original_fp.split("/")
+    
     try:
         if filter_type == "glasses":
             # Call apply_glasses from the glasses module
             glasses_mod.apply_glasses('/'.join(spl[:-1]), spl[-1], target_fp)
         elif filter_type == "makeup":
             makeup_mod.apply_makeup('/'.join(spl[:-1]), spl[-1], target_fp)
+        elif filter_type == "mask":
+            print("Original fp:", original_fp)
+            status = call("python mask_the_face.py --path {} --mask_type 'N95' --verbose".format(original_fp),
+                    cwd="/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/preprocessing/perturb_filters/mask", 
+                    shell=True)
+            
+            # Move saved image to target_fp
+            mask_image_fp = '_N95.'.join(spl[-1].split("."))
+            os.rename('/'.join(spl[:-1]) + "/" + mask_image_fp, target_fp + spl[-1])
+            print("Moved image to temp folder", status)
+        else: raise Exception("filter_type is not accepted")
         print("Success!")
     except Exception as e:
         print("Please try Again.")
         print(e)
-
-# In[4]:
-
-
-# apply_glasses("tom.jpg", '')
 
 
 # In[3]:
@@ -240,7 +247,7 @@ def apply_filter(original_fp, target_fp, filter_type):
 # In[13]:
 
 
-def make_pred(image_fn, model_type, pt=None):
+def make_pred(image_fn, model_type, debiased=False, pt=None):
     """
     Returns predicted class and confidence for a single image
     image_fn : str
@@ -250,17 +257,17 @@ def make_pred(image_fn, model_type, pt=None):
     pt : str
         Perturbation type (default = None)
     """
+    model_path = '/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/timeline/{}/best_weights/set10/model_tl_best_weights_{}_set10.h5'
     # Set model
-    if (model_type == "mobile"):
-        model = tf.keras.models.load_model('/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/timeline/(8)_debiased_25/best_weights/set10/model_tl_best_weights_mobile_set10.h5')
-    elif (model_type == "dense"):
-        model = tf.keras.models.load_model('/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/timeline/(8)_debiased_25/best_weights/set10/model_tl_best_weights_dense_set10.h5')
-    elif (model_type == "res"):
-        model = tf.keras.models.load_model('/home/monash/Desktop/fyp-work/fyp-ma-13/fyp-models/timeline/(8)_debiased_25/best_weights/set10/model_tl_best_weights_res_set10.h5')
+    if (model_type == "mobile") or (model_type == "dense") or (model_type == "res"):
+        if not debiased:
+            model = tf.keras.models.load_model(model_path.format("(8)_debiased_25", model_type))
+        else:
+            model = tf.keras.models.load_model(model_path.format("(5)_early_stopping_20", model_type))
     else:
         raise Exception("Sorry, model_type allowed are 'mobile' (MobileNet), 'dense' (DenseNet)         or 'res' (ResNet50)")
         
-    print("Model Loaded")
+    print(model_type, "loaded")
     
     if pt is None:
         # For unperturbed
@@ -294,12 +301,6 @@ def make_pred(image_fn, model_type, pt=None):
         return ("Female", 1 - confidence)
     else:
         raise Exception("Issue during prediction occured")
-
-
-# In[16]:
-
-
-# make_pred('gal.jpeg', 'mobile')
 
 
 # In[ ]:
