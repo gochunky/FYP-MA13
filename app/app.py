@@ -61,7 +61,7 @@ class App:
 
     def __init__(self):
         """
-        Initialises the application properties
+        Initialises the UI elements
         """
         self.root = tk.Tk()
         self._constant_widgets()
@@ -71,7 +71,7 @@ class App:
 
     def _constant_widgets(self):
         """
-        Initialises the constant widgets of the application
+        Initialises the widgets
         """
         self.root.title("Gender Classifier")
 
@@ -90,7 +90,7 @@ class App:
 
     def _options_menu(self):
         """
-        Initialises the options menu of the application
+        Initialises the options menu
         """
         menu_frame = tk.Frame(self.root)
         menu_frame.pack()
@@ -110,7 +110,7 @@ class App:
 
     def _mainframe(self):
         """
-        Initialises the main frame of the application
+        Initialises the window frame
         """
         self.frame = tk.Frame(self.root, bg="white")
         self.frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
@@ -118,7 +118,7 @@ class App:
 
     def _buttons(self):
         """
-        Initialises the buttons of the application
+        Initialises the buttons
         """
         fixed_options = {
             "master": self.root,
@@ -133,21 +133,6 @@ class App:
         tk.Button(text="Classify Image", command=self.classify, **fixed_options).pack(
             side=tk.RIGHT
         )
-
-    def update_img(self, img_path, basewidth):
-        """
-        Processes and returns a given image to be displayed in the application.
-
-        img_path : str
-            Path to the image to be displayed
-        basewidth : float
-            Width to scale the given image to
-        """
-        with Image.open(img_path) as img:
-            wpercent = basewidth / float(img.size[0])
-            hsize = int(float(img.size[1]) * wpercent)
-            img = img.resize((basewidth, hsize), Image.ANTIALIAS)
-        return ImageTk.PhotoImage(img)
 
     def load(self):
         """
@@ -240,6 +225,21 @@ class App:
         self.stats_img = self.update_img(stats_fp, 850)
         stats_tk = tk.Label(self.frame, image=self.stats_img, bg="white")
         stats_tk.place(relx=0.4, rely=0.1)
+    
+    def update_img(self, img_path, basewidth):
+        """
+        Processes and returns a given image to be displayed in the application.
+
+        img_path : str
+            Path to the image to be displayed
+        basewidth : float
+            Width to scale the given image to
+        """
+        with Image.open(img_path) as img:
+            wpercent = basewidth / float(img.size[0])
+            hsize = int(float(img.size[1]) * wpercent)
+            img = img.resize((basewidth, hsize), Image.ANTIALIAS)
+        return ImageTk.PhotoImage(img)
 
     def run(self):
         """
