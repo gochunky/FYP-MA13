@@ -158,7 +158,6 @@ def gen_save_cr_cm(model_type, all_models, original_fp, target_fp, perturbation=
     if perturbation != 'all':
         assert perturbation in ['ori', 'masked', 'glasses', 'makeup']
     
-    # @TODO: Solve this inefficient checking of gender
     temp = gender
     if temp is None: # Checks if it is for all genders
         temp = 'bothg'
@@ -203,12 +202,14 @@ makeup_mod = imp.load_source('apply_makeup', '/home/monash/Desktop/fyp-work/fyp-
 # Perturbation functions
 def apply_filter(original_fp, target_fp, filter_type):
     """
-    Applies a specific filter to specific image
+    Applies a desired filter to specific image
     
-    image_fp : str
+    original_fp : str
         File path containing image
     target_fp : str
         Target path to folder to store image
+    filter_type : str
+        Type of filter to apply on the image
     """
     spl = original_fp.split("/")
     
@@ -250,6 +251,7 @@ def apply_filter(original_fp, target_fp, filter_type):
 def make_pred(image_fn, model_type, debiased=False, pt=None):
     """
     Returns predicted class and confidence for a single image
+    
     image_fn : str
         Path to image
     model_type : str
@@ -301,10 +303,4 @@ def make_pred(image_fn, model_type, debiased=False, pt=None):
         return ("Female", 1 - confidence)
     else:
         raise Exception("Issue during prediction occured")
-
-
-# In[ ]:
-
-
-
 
