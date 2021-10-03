@@ -24,3 +24,4 @@
 *.PPTX   diff=astextplain
 *.xlsx   diff=astextplain
 *.XLSX   diff=astextplain
+
